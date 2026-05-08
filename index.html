@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varsha Tambe | ML Engineer & Educator</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-muted: #4a4a6a;
+    --ink-faint: #8888aa;
+    --cream: #faf8f3;
+    --warm: #f5f0e8;
+    --accent: #c4622d;
+    --accent-soft: #f0ddd3;
+    --accent2: #2d6a4f;
+    --accent2-soft: #d8ede2;
+    --gold: #b5860d;
+    --gold-soft: #f5edcc;
+    --border: rgba(26,26,46,0.12);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,248,243,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px 5vw 60px;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(196,98,45,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--ink-muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+  .hero-bio {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1.75rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    border: 1px solid var(--ink);
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--ink); }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .avatar-ring {
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--warm);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .avatar-initials {
+    font-family: var(--serif);
+    font-size: 5rem;
+    color: var(--accent);
+    letter-spacing: -0.05em;
+  }
+  .stat-chips {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    bottom: -30px;
+    left: -20px;
+    right: -20px;
+  }
+  .chip {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .chip-num {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    color: var(--ink);
+    line-height: 1;
+    display: block;
+  }
+  .chip-label {
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 5vw; }
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 3rem;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--ink-muted);
+    margin-bottom: 1.2rem;
+    line-height: 1.85;
+  }
+  .contact-list { list-style: none; margin-top: 2rem; }
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+  }
+  .contact-list .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    width: 80px;
+    flex-shrink: 0;
+  }
+  .personal-details {
+    background: var(--warm);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2rem;
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-row .key { color: var(--ink-faint); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .detail-row .val { color: var(--ink); font-weight: 500; }
+
+  /* ── SKILLS ── */
+  .skills-bg { background: var(--ink); }
+  .skills-bg .section-label { color: rgba(255,255,255,0.35); }
+  .skills-bg .section-label::after { background: rgba(255,255,255,0.12); }
+  .skills-bg .section-title { color: var(--cream); }
+  .skills-bg .section-title em { color: #e89a6e; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    padding: 1.75rem;
+  }
+  .skill-card-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 1px;
+    font-weight: 400;
+  }
+  .tag-light {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .tag-accent {
+    background: rgba(196,98,45,0.2);
+    color: #e89a6e;
+    border: 1px solid rgba(196,98,45,0.3);
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .timeline-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid var(--ink);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .timeline-dot.active {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .timeline-dot .inner {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--cream);
+  }
+  .timeline-content {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline-item:last-child .timeline-content { border-bottom: none; }
+  .timeline-period {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-role {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .timeline-org {
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    line-height: 1.75;
+  }
+  .project-tag {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0.3rem 0.75rem;
+    border-radius: 1px;
+    font-weight: 500;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-bg { background: var(--warm); }
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .edu-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+  }
+  .edu-degree {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .edu-institution {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-bottom: 0.5rem;
+  }
+  .edu-grade {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent2);
+  }
+  .edu-year {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    margin-top: 0.4rem;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+  }
+  .contact-section .section-label { color: rgba(255,255,255,0.3); justify-content: center; }
+  .contact-section .section-label::after { display: none; }
+  .contact-section .section-title { color: var(--cream); }
+  .contact-section .section-title em { color: #e89a6e; }
+  .contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px;
+    padding: 1.5rem 2rem;
+    min-width: 200px;
+    transition: background 0.2s;
+  }
+  .contact-card:hover { background: rgba(255,255,255,0.1); }
+  .contact-card .cc-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 0.5rem;
+  }
+  .contact-card .cc-val {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    word-break: break-all;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Varsha Tambe</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">ML Engineer &amp; Educator</div>
+    <h1 class="hero-name">Mrs. <em>Varsha</em><br>Tambe</h1>
+    <p class="hero-title">Associate Data Scientist · Assistant Professor</p>
+    <p class="hero-bio">
+      8+ years of experience at the intersection of machine learning and engineering education.
+      Building LLM-powered solutions, teaching mechanical engineering, and bridging the gap between research and real-world impact.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div style="position:relative; width:320px; height:320px; margin-bottom:60px;">
+      <div class="avatar-ring">
+        <span class="avatar-initials">VT</span>
+      </div>
+      <div class="stat-chips">
+        <div class="chip">
+          <span class="chip-num">8+</span>
+          <span class="chip-label">Years Exp.</span>
+        </div>
+        <div class="chip">
+          <span class="chip-num">ME</span>
+          <span class="chip-label">Masters Degree</span>
+        </div>
+        <div class="chip">
+          <span class="chip-num">LLM</span>
+          <span class="chip-label">Specialization</span>
+        </div>
+        <div class="chip">
+          <span class="chip-num">5+</span>
+          <span class="chip-label">ML Projects</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <h2 class="section-title">A passion for <em>data</em><br>and discovery</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I am a Machine Learning professional and educator with over 8 years of combined experience as an Associate Data Scientist and Assistant Professor in Mechanical Engineering. My work spans the full ML pipeline — from data preprocessing and feature engineering to model deployment and LLM-powered applications.
+      </p>
+      <p>
+        I have worked on complex NLP tasks, built chatbots using state-of-the-art large language models (LLaMA2, MPT-30B, Defog SQL Coder), and led teams in delivering data-driven business solutions.
+      </p>
+      <p>
+        As an educator, I am deeply committed to student growth — organizing international events, championing women's welfare, and guiding students through challenging engineering subjects and projects.
+      </p>
+      <ul class="contact-list">
+        <li><span class="label">Location</span> Chh. Sambhajinagar, Maharashtra</li>
+        <li><span class="label">Email</span> vc.tambe92@gmail.com</li>
+        <li><span class="label">Phone</span> 9359975106 / 7709248615</li>
+        <li><span class="label">Languages</span> Marathi, Hindi, English</li>
+      </ul>
+    </div>
+    <div>
+      <div class="personal-details">
+        <div class="detail-row"><span class="key">Date of Birth</span><span class="val">01 June 1992</span></div>
+        <div class="detail-row"><span class="key">Nationality</span><span class="val">Indian</span></div>
+        <div class="detail-row"><span class="key">Current Role</span><span class="val">Asst. Professor, Mech. Engg.</span></div>
+        <div class="detail-row"><span class="key">Domain</span><span class="val">ML / DL / NLP / LLMs</span></div>
+        <div class="detail-row"><span class="key">Teaching</span><span class="val">DME, Mfg. Processes, Engg. Graphics</span></div>
+        <div class="detail-row"><span class="key">Experience</span><span class="val">8+ Years</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-bg">
+  <div class="section-label">02 — Skills</div>
+  <h2 class="section-title">Technical <em>expertise</em></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-title">Python / ML Libraries</div>
+      <div class="skill-tags">
+        <span class="tag tag-accent">Python</span>
+        <span class="tag tag-light">NumPy</span>
+        <span class="tag tag-light">Pandas</span>
+        <span class="tag tag-light">Scikit-learn</span>
+        <span class="tag tag-light">Keras</span>
+        <span class="tag tag-light">TensorFlow</span>
+        <span class="tag tag-light">Flask</span>
+        <span class="tag tag-light">Matplotlib</span>
+        <span class="tag tag-light">Seaborn</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Machine Learning</div>
+      <div class="skill-tags">
+        <span class="tag tag-accent">Regression</span>
+        <span class="tag tag-accent">Classification</span>
+        <span class="tag tag-light">SVM</span>
+        <span class="tag tag-light">Random Forest</span>
+        <span class="tag tag-light">XGBoost</span>
+        <span class="tag tag-light">K-Means</span>
+        <span class="tag tag-light">PCA</span>
+        <span class="tag tag-light">Gradient Boosting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Deep Learning &amp; NLP</div>
+      <div class="skill-tags">
+        <span class="tag tag-accent">ANN</span>
+        <span class="tag tag-accent">CNN</span>
+        <span class="tag tag-accent">RNN / LSTM</span>
+        <span class="tag tag-light">NLP</span>
+        <span class="tag tag-light">Word2Vec</span>
+        <span class="tag tag-light">TF-IDF</span>
+        <span class="tag tag-light">NLTK</span>
+        <span class="tag tag-light">Embeddings</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Large Language Models</div>
+      <div class="skill-tags">
+        <span class="tag tag-accent">LLaMA 2</span>
+        <span class="tag tag-accent">MPT-30B</span>
+        <span class="tag tag-accent">Defog SQLCoder</span>
+        <span class="tag tag-light">Vicuna</span>
+        <span class="tag tag-light">vLLM</span>
+        <span class="tag tag-light">Transformers</span>
+        <span class="tag tag-light">Prompt Engineering</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Tools &amp; Platforms</div>
+      <div class="skill-tags">
+        <span class="tag tag-light">SQL</span>
+        <span class="tag tag-light">MySQL</span>
+        <span class="tag tag-light">Jupyter</span>
+        <span class="tag tag-light">Anaconda</span>
+        <span class="tag tag-light">Linux</span>
+        <span class="tag tag-light">Windows</span>
+        <span class="tag tag-light">MS Excel</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Teaching Subjects</div>
+      <div class="skill-tags">
+        <span class="tag tag-light">Design of Machine Elements</span>
+        <span class="tag tag-light">Manufacturing Processes</span>
+        <span class="tag tag-light">Engineering Graphics</span>
+        <span class="tag tag-light">BME</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 — Experience</div>
+  <h2 class="section-title">Professional <em>journey</em></h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot active"><div class="inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-period">Sep 2025 – Present</div>
+        <div class="timeline-role">Assistant Professor</div>
+        <div class="timeline-org">CSMSS College of Engineering, Kanchanwadi</div>
+        <p class="timeline-desc">Teaching in the Department of Mechanical Engineering. Delivering challenging subjects while mentoring students and contributing to departmental initiatives.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-period">Sep 2024 – Aug 2025</div>
+        <div class="timeline-role">Lecturer</div>
+        <div class="timeline-org">CSMSS College of Polytechnic, Kanchanwadi</div>
+        <p class="timeline-desc">Taught Mechanical Engineering, conducted technical events, assisted students in external competitions, and served as Departmental Admission Incharge.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-period">Feb 2023 – Mar 2024</div>
+        <div class="timeline-role">Senior Data Scientist</div>
+        <div class="timeline-org">Konverge.AI, Nagpur</div>
+        <p class="timeline-desc">Led LLM-powered chatbot development and NLP research. Collaborated with cross-functional teams on complex data challenges using state-of-the-art language models.</p>
+        <span class="project-tag">Defog SQL Coder Chatbot</span>
+        <span class="project-tag">MPT-30B Q&amp;A System</span>
+        <span class="project-tag">LLM Inference Benchmarking</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-period">May 2022 – Jan 2023</div>
+        <div class="timeline-role">Associate Data Scientist</div>
+        <div class="timeline-org">IFS India Mercantile Pvt. Ltd, Pune</div>
+        <p class="timeline-desc">Worked on data preprocessing, cleaning, and building ML models for business insights from customer complaints data. Developed speech analytics and machine translation solutions.</p>
+        <span class="project-tag">Multi-Class Document Classification</span>
+        <span class="project-tag">Machine Translation (EN–FR)</span>
+        <span class="project-tag">Speech Emotion Analytics</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-period">Jun 2018 – Apr 2022</div>
+        <div class="timeline-role">Assistant Professor</div>
+        <div class="timeline-org">Smt. Kashibai Navale College of Engineering, Pune</div>
+        <p class="timeline-desc">4-year tenure teaching Mechanical Engineering. Led international events, served as Head of Women Welfare Cell, NAAC committee member, and Institute Admission Taluka Coordinator.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-period">Nov 2015 – Sep 2016</div>
+        <div class="timeline-role">Engineering Intern</div>
+        <div class="timeline-org">Larsen &amp; Toubro Ltd, Ahmednagar</div>
+        <p class="timeline-desc">Worked on RCCB manufacturing process improvement through Latch Assembly design changes. Applied Six Sigma, root cause analysis, DFMEA, and quality tools to resolve defects.</p>
+        <span class="project-tag">Six Sigma</span>
+        <span class="project-tag">DFMEA</span>
+        <span class="project-tag">Process Improvement</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><div class="inner"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-period">Aug 2014 – May 2016</div>
+        <div class="timeline-role">Teaching &amp; Event Organizer</div>
+        <div class="timeline-org">Pravara Rural Engineering College, Loni</div>
+        <p class="timeline-desc">Organized national and international events, served on NAAC committee and Women Welfare Cell.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="edu-bg">
+  <div class="section-label">04 — Education</div>
+  <h2 class="section-title">Academic <em>background</em></h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">Master of Engineering (M.E.)</div>
+      <div class="edu-institution">Savitribai Phule Pune University (SPPU)</div>
+      <div class="edu-grade">CGPA 8.04 — Distinction</div>
+      <div class="edu-year">2016</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Engineering (B.E.)</div>
+      <div class="edu-institution">Savitribai Phule Pune University (SPPU)</div>
+      <div class="edu-grade">63.20%</div>
+      <div class="edu-year">2014</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">HSC — Class XII</div>
+      <div class="edu-institution">Maharashtra State Board</div>
+      <div class="edu-grade">63.83%</div>
+      <div class="edu-year">2010</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">SSC — Class X</div>
+      <div class="edu-institution">Maharashtra State Board</div>
+      <div class="edu-grade">74.61%</div>
+      <div class="edu-year">2008</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-label">05 — Contact</div>
+  <h2 class="section-title">Let's <em>connect</em></h2>
+  <p style="color:rgba(255,255,255,0.5); max-width:500px; margin: 0 auto 1rem; font-size:0.95rem;">
+    Open to collaborations in machine learning, research, and educational initiatives.
+  </p>
+  <div class="contact-cards">
+    <div class="contact-card">
+      <div class="cc-label">Email</div>
+      <div class="cc-val">vc.tambe92@gmail.com</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-label">Phone</div>
+      <div class="cc-val">9359975106<br>7709248615</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-label">Location</div>
+      <div class="cc-val">Chh. Sambhajinagar<br>Maharashtra, India</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 Varsha Chandrasen Tambe · ML Engineer &amp; Educator
+</footer>
+
+</body>
+</html>
